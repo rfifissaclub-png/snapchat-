@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+
+  <link rel="shortcut icon" href="img/faviconV2.png">
+  <meta name="description" content="Snapchat - Sign up and log in">
+  <title>Snapchat</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/landing.css">
+</head>
+<body>
+  <main class="landing">
+    <div class="logo-wrap" aria-hidden="true">
+      <!-- Ghost Snapchat logo (white with thick black outline) -->
+      <img class="ghost-logo-img" src="img/icon.svg" alt="Snapchat" />
+    </div>
+
+
+    <div class="cta">
+      <button type="button" class="pill pill-google" onclick="window.location.href='/login.html'">
+        <span class="google-icon" aria-hidden="true"></span>
+        <span class="pill-text">Continuer avec Google</span>
+      </button>
+
+      <!-- Inscription => redirige vers le vrai lien signup (mock UI) -->
+      <button type="button" class="pill pill-signup" onclick="window.location.href='https://accounts.snapchat.com/v2/signup'">
+        <span class="pill-text pill-text-white">Inscription</span>
+      </button>
+    </div>
+
+    <div class="helper">
+      <span>Vous avez déjà un compte ? </span>
+      <a href="/login.html">Connectez-vous</a>
+    </div>
+  </main>
+</body>
+</html>
+
+
